@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: spring
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    external-dns.alpha.kubernetes.io/hostname: spring.jasonumiker.com
+spec:
+  tls:
+  - hosts:
+    - spring.jasonumiker.com
+  rules:
+  - http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/*"
+        backend:
+          service:
+            name: spring
+            port:
+              number: 80

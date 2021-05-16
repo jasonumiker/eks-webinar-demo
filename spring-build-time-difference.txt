@@ -1,0 +1,3 @@
+=> [build 7/9] RUN --mount=type=cache,target=/root/.m2 ./mvnw install -DskipTests 408.3s
+vs.
+=> CACHED [build 7/9] RUN --mount=type=cache,target=/root/.m2 ./mvnw install -DskipTests 0.0s
