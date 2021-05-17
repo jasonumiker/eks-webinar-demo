@@ -8,11 +8,24 @@
 
 ## Deploy the Quickstart
 
-TODO Add steps here to do the deployment of https://github.com/jasonumiker/eks-quickstart via CodeBuild
+Prereqs:
+1. Fork https://github.com/jasonumiker/eks-quickstart
+1. Generate a personal access token on GitHub - https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+1. Edit cluster-codebuild/EKSCodeBuildStack.template.json to change Location to your GitHub repo/path
+1. Run aws codebuild import-source-credentials --server-type GITHUB --auth-type PERSONAL_ACCESS_TOKEN --token <token_value> to provide your token to CodeBuild
+1. Deploy cluster-codebuild/EKSCodeBuildStack.template.json via the AWS CloudFormation Console in the region you'd like the cluster
+
+During the Demo:
+1. Go to the CodeBuild console, click on the Build project that starts with EKSCodeBuild, and then click the Start build button.
+1. Explain that merging changes into the right path on the right branch will trigger a build automatically - which is GitOps for the cluster
+1. Show the `buildspec.yml` to explain what CodeBuild is doing
+1. Go into the build and tail the log showing that `cdk deploy` is happening
 
 ## Explain the CDK and what is happening
 
-TODO Add what exactly to highlight explain
+1. Open the eks_cluster.py file in VS Code
+1. Show that the parameters have been exposed as strings and booleans up top
+1. Show how it can bridge the gap between AWS and Kubernetes with the managed Elasticsearch, IAM/IRSA & fluent-bit Helm chart
 
 ## Local Docker Demo - Containerising Spring Boot App
 
